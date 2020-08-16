@@ -52,7 +52,6 @@ export class ViewData extends Component {
             }),
         }).then(res => res.json()).then(data => {
             this.props.closeloader()
-            console.log(data)
             if (data.error === "token had expired") {
                 this.props.openstatusbar("Session had Expired")
                 this.props.logout()

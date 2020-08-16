@@ -27,7 +27,6 @@ export class Upload extends Component {
         let requestdata = {
             token: this.props.token, jsonSQLFormat
         }
-        console.log(jsonSQLFormat)
         this.setState({ json: jsonReturn })
         fetch("/getCsv", {
             method: 'post',
