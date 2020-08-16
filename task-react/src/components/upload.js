@@ -29,7 +29,7 @@ export class Upload extends Component {
         }
         console.log(jsonSQLFormat)
         this.setState({ json: jsonReturn })
-        fetch("/show", {
+        fetch("/getCsv", {
             method: 'post',
             body: JSON.stringify(requestdata),
         }).then(res => res.json()).then(data => {

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import { IconButton } from '@material-ui/core';
 export class ViewData extends Component {
     constructor(props) {
         super(props);
@@ -31,6 +33,16 @@ export class ViewData extends Component {
             },
         }
     }
+    onGridReady = params => {
+        this.gridApi = params.api;
+        this.gridColumnApi = params.columnApi;
+    };
+    downloadCsv = () => {
+        let params = {
+            fileName: "data"
+        }
+        this.gridApi.exportDataAsCsv(params);
+    };
     componentDidMount() {
         this.props.openloader()
         fetch("/view", {
@@ -55,18 +67,25 @@ export class ViewData extends Component {
     }
     render() {
         return (
-            <div
-                className="ag-theme-alpine"
-                style={{
-                    height: '475px',
-                    width: '100%',
-                    overflow: "visable"
-                }}  >
-                {this.state.rowData && <AgGridReact
-                    columnDefs={this.state.columnDefs} defaultColDef={this.state.defaultColDef}
-                    rowData={this.state.rowData}>
-                </AgGridReact>}
-            </div>
+            <> <div style={{ width: "100%" }}><div style={{ float: "right" }}>
+                <IconButton onClick={() => this.downloadCsv()}>
+                    <GetAppIcon />
+                </IconButton>
+            </div></div>
+                <div
+                    className="ag-theme-alpine"
+                    style={{
+                        height: '475px',
+                        width: '100%',
+                        overflow: "visable"
+                    }}  >
+                    {this.state.rowData &&
+                        <AgGridReact
+                            columnDefs={this.state.columnDefs} defaultColDef={this.state.defaultColDef}
+                            rowData={this.state.rowData} onGridReady={this.onGridReady}>
+                        </AgGridReact>
+                    }
+                </div></>
         );
     }
 }

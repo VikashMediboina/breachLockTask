@@ -13,7 +13,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "cd task-react && npm run build  && cd .. && nodemon index.js",
+    "startprod": "cd task-react && npm run build  && cd .. && nodemon index.js",
+    "intialSetup": "npm i && cd task-react && npm i",
     "serve": "cd task-react && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

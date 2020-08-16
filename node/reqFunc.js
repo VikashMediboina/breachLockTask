@@ -8,7 +8,7 @@ const reqfun = {}
 
 reqfun.postReq = (req, res) => {
     const { pathname } = url.parse(req.url)
-    if (pathname === '/show') {
+    if (pathname === '/getCsv') {
         let body = [];
         req.on('data', (chunk) => {
             body.push(chunk);
